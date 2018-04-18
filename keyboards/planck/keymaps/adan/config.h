@@ -3,6 +3,6 @@
 
 #include "../../config.h"
 
-#define PERMISSIVE_HOLD
+#define TAPPING_TERM 115
 
 #endif

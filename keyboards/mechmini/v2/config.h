@@ -17,6 +17,7 @@
 
 #include "config_common.h"
 
+#define TAPPING_TERM 115
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
@@ -69,7 +70,7 @@
 #ifdef RGB_DI_PIN
 #define RGBLIGHT_ANIMATIONS
 #define RGBLED_NUM 14
-#define RGBLIGHT_HUE_STEP 8
+#define RGBLIGHT_HUE_STEP 285
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 #endif
