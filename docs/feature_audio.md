@@ -1,6 +1,17 @@
 # Audio
 
-Your keyboard can make sounds! If you've got a Planck, Preonic, or basically any AVR keyboard that allows access to the C6 or B5 port (`#define C6_AUDIO` and/or `#define B5_AUDIO`), you can hook up a simple speaker and make it beep. You can use those beeps to indicate layer transitions, modifiers, special keys, or just to play some funky 8bit tunes.
+Your keyboard can make sounds! If you've got a Planck, Preonic, or basically any AVR keyboard that allows access to certain PWM-capable pins, you can hook up a simple speaker and make it beep. You can use those beeps to indicate layer transitions, modifiers, special keys, or just to play some funky 8bit tunes.
+
+Up to two simultaneous audio voices are supported, one driven by timer 1 and another driven by timer 3.  The following pins can be defined as audio outputs in config.h:
+Timer 1:
+`#define B5_AUDIO`
+`#define B6_AUDIO`
+`#define B7_AUDIO`
+
+Timer 3:
+`#define C4_AUDIO`
+`#define C5_AUDIO`
+`#define C6_AUDIO`
 
 If you add `AUDIO_ENABLE = yes` to your `rules.mk`, there's a couple different sounds that will automatically be enabled without any other configuration:
 
@@ -47,9 +58,9 @@ PLAY_LOOP(my_song);
 
 It's advised that you wrap all audio features in `#ifdef AUDIO_ENABLE` / `#endif` to avoid causing problems when audio isn't built into the keyboard.
 
-## Music mode
+## Music Mode
 
-The music mode maps your columns to a chromatic scale, and your rows to octaves. This works best with ortholinear keyboards, but can be made to work with others. All keycodes less than `0xFF` get blocked, so you won't type while playing notes - if you have special keys/mods, those will still work. A work-around for this is to jump to a different layer with KC_NOs before (or after) enabling music mode.  
+The music mode maps your columns to a chromatic scale, and your rows to octaves. This works best with ortholinear keyboards, but can be made to work with others. All keycodes less than `0xFF` get blocked, so you won't type while playing notes - if you have special keys/mods, those will still work. A work-around for this is to jump to a different layer with KC_NOs before (or after) enabling music mode.
 
 Recording is experimental due to some memory issues - if you experience some weird behavior, unplugging/replugging your keyboard will fix things.
 
@@ -82,7 +93,11 @@ The pitch standard (`PITCH_STANDARD_A`) is 440.0f by default - to change this, a
 
     #define PITCH_STANDARD_A 432.0f
 
-## MIDI functionalty
+You can completely disable Music Mode as well. This is useful, if you're pressed for space on your controller.  To disable it, add this to your `config.h`:
+
+    #define NO_MUSIC_MODE
+
+## MIDI Functionality
 
 This is still a WIP, but check out `quantum/keymap_midi.c` to see what's happening. Enable from the Makefile.
 
